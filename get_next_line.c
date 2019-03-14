@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 00:15:44 by tcho              #+#    #+#             */
-/*   Updated: 2019/03/13 16:58:53 by tcho             ###   ########.fr       */
+/*   Updated: 2019/03/13 17:04:30 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 #define BUFF_SIZE 256
 
-int ft_findindex(char *str, char c)
+int	ft_findindex(char *str, char c)
 {
 	int i;
 
@@ -29,16 +29,16 @@ int ft_findindex(char *str, char c)
 	return ((str[i]) ? i : -1);
 }
 
-int set_line(char **container, int fd, int bytes, char **line)
+int	set_line(char **container, int fd, int bytes, char **line)
 {
-	int newline_index;
-	char *tmp;
+	int		newline_index;
+	char	*tmp;
 
 	if (!&container[fd] || !container[fd])
 		return (0);
 	if (bytes >= 0)
 	{
-		if ((newline_index = ft_findindex(container[fd], '\n')) == -1) // Got to the end of the file.
+		if ((newline_index = ft_findindex(container[fd], '\n')) == -1)
 		{
 			*line = ft_strdup(container[fd]);
 			free(container[fd]);
@@ -53,12 +53,12 @@ int set_line(char **container, int fd, int bytes, char **line)
 	return (-1);
 }
 
-int get_next_line(const int fd, char **line)
+int	get_next_line(const int fd, char **line)
 {
-	static char *container[256];
-	char buffer[BUFF_SIZE + 1];
-	ssize_t bytes;
-	char *tmp;
+	static char	*container[256];
+	char		buffer[BUFF_SIZE + 1];
+	ssize_t		bytes;
+	char		*tmp;
 
 	if (fd < 0 || !line)
 		return (-1);
@@ -71,7 +71,7 @@ int get_next_line(const int fd, char **line)
 		free(container[fd]);
 		container[fd] = tmp;
 		if (ft_strchr(buffer, '\n'))
-			break;
+			break ;
 	}
 	return (set_line(container, fd, bytes, line));
 }
